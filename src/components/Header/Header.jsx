@@ -2,7 +2,13 @@ import "./Header.css";
 import "../../vender/fonts/fonts.css";
 import Navigation from "../Navigation/Navigation";
 
-function Header({ onSignInClick, onSignUpClick }) {
+function Header({
+  onSignInClick,
+  onSignUpClick,
+  isLoggedIn,
+  onSignOutClick,
+  onAddMaterialClick,
+}) {
   return (
     <header className="header">
       <div className="header__logo">
@@ -18,12 +24,28 @@ function Header({ onSignInClick, onSignUpClick }) {
         <Navigation />
       </div>
       <div className="header__btn-wrap">
-        <button className="header__btn" onClick={onSignInClick}>
-          Sign In
-        </button>
-        <button className="header__btn" onClick={onSignUpClick}>
-          Sign Up
-        </button>
+        {isLoggedIn ? (
+          <>
+            <button
+              className="header__btn header__btn_add"
+              onClick={onAddMaterialClick}
+            >
+              Add Material
+            </button>{" "}
+            <button className="header__btn" onClick={onSignOutClick}>
+              Sign Out
+            </button>
+          </>
+        ) : (
+          <>
+            <button className="header__btn" onClick={onSignInClick}>
+              Sign In
+            </button>
+            <button className="header__btn" onClick={onSignUpClick}>
+              Sign Up
+            </button>
+          </>
+        )}
       </div>
     </header>
   );

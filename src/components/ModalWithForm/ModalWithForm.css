@@ -17,6 +17,8 @@
 
 .modal__title {
   font-size: 28px;
+  margin-top: 5px;
+  color: white;
 }
 
 .modal__close {
@@ -28,11 +30,11 @@
   cursor: pointer;
   padding: 8px;
   font-size: 16px;
-  border: double 1px gray;
+  border: double 1px black;
 }
 
 .modal__close:hover {
-  border: double 1px black;
+  border: double 1px gray;
 }
 
 .modal__content {

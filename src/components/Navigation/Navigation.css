@@ -13,10 +13,10 @@
 .navigation__link {
   text-decoration: none;
   color: white;
-  padding: 5px 10px;
+  padding: 3px;
   display: block;
   transition: all 0.3s ease;
-  font-size: 13px;
+  font-size: 16px;
   position: relative; /* This helps position the arrow */
   padding-left: 2.25rem; /* Make space for the arrow */
 }
