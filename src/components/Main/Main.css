@@ -1,3 +1,7 @@
 main {
   padding: 16px 32px;
 }
+
+.material-cards {
+  display: flex;
+}

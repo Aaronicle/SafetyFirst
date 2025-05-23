@@ -4,14 +4,16 @@
   flex-direction: column;
   color: rgb(255, 255, 255);
   background-color: darkred;
-  height: 350px;
-  width: 250px;
+  height: 370px;
+  width: 260px;
   margin-left: 20px;
+  margin-top: 20px;
   border-radius: 10%;
 }
 
 .material-card__name {
   align-self: center;
+  font-size: 20px;
 }
 
 .material-card__hmis-list {
@@ -57,6 +59,7 @@
 }
 
 .material-card__ppe-item {
-  font-size: 16px;
+  font-size: 20px;
   padding-top: 5px;
+  text-align: center;
 }

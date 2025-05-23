@@ -1,10 +1,33 @@
 import "./MaterialCard.css";
 
+const PPE_REQUIREMENTS = {
+  A: ["Safety Glasses"],
+  B: ["Safety Glasses", "Gloves"],
+  C: ["Safety Glasses", "Gloves", "Apron"],
+  D: ["Face Shield", "Gloves", "Apron"],
+  E: ["Safety Glasses", "Gloves", "Dust Respirator"],
+  F: ["Safety Glasses", "Gloves", "Apron", "Dust Respirator"],
+  G: ["Safety Glasses", "Vapor Respirator"],
+  H: ["Splash Goggles", "Gloves", "Apron", "Vapor Respirator"],
+  I: ["Safety Glasses", "Gloves", "Dust/Vapor Respirator"],
+  J: ["Splash Goggles", "Gloves", "Apron", "Dust/Vapor Respirator"],
+  K: ["Airline Hood or Mask", "Gloves", "Full Suit", "Boots"],
+  X: [
+    "Ask Supervisor or Safety Specialist for Handling Instructions, or Refer to MSDS Sheet for Specific Directions",
+  ],
+};
+
+function getRequiredPPE(ppeCode) {
+  return PPE_REQUIREMENTS[ppeCode.toUpperCase()] || [];
+}
+
 function MaterialCard({
   material,
   setSelectedMaterial,
   setIsMaterialDetailModalOpen,
 }) {
+  const requiredPPEList = getRequiredPPE(material.ppe);
+
   const handleCardClick = () => {
     console.log("Card clicked:", material);
     setSelectedMaterial(material);
@@ -36,7 +59,7 @@ function MaterialCard({
         <div className="material-card__ppe">
           <h4 className="material-card__ppe-title">Required PPE</h4>
           <div className="material-card__ppe-list">
-            {material.requiredPPE.map((item, index) => (
+            {requiredPPEList.map((item, index) => (
               <div key={index} className="material-card__ppe-item">
                 {item}
               </div>

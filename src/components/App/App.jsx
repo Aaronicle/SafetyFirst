@@ -22,6 +22,7 @@ function App() {
   const [selectedMaterial, setSelectedMaterial] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [materials, setMaterials] = useState([]);
+  const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
 
   useEffect(() => {
     // Load materials from localStorage when the app starts
@@ -45,6 +46,13 @@ function App() {
     setIsMaterialDetailModalOpen(true);
   const handleCloseMaterialDetailModal = () =>
     setIsMaterialDetailModalOpen(false);
+  const handleOpenEditProfileModal = () => {
+    setIsEditProfileModalOpen(true);
+  };
+
+  const handleCloseEditProfileModal = () => {
+    setIsEditProfileModalOpen(false);
+  };
 
   const handleSignOutClick = () => {
     setIsLoggedIn(false);
@@ -108,7 +116,17 @@ function App() {
                   />
                 }
               ></Route>
-              <Route path="/profile" element={<Profile />}></Route>
+              <Route
+                path="/profile"
+                element={
+                  <Profile
+                    materials={materials}
+                    handleAddMaterial={handleOpenAddMaterialModal}
+                    onSignOut={handleSignOutClick}
+                    handleEditProfile={handleOpenEditProfileModal}
+                  />
+                }
+              ></Route>
             </Routes>
             <Footer />
             <LoginModal
