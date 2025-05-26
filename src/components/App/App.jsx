@@ -118,7 +118,7 @@ function App() {
   };
 
   return (
-    <Router>
+    <HashRouter>
       <UserContext.Provider value={{ currentUser, setCurrentUser }}>
         <div className="App">
           <div className="App__content">
@@ -194,7 +194,7 @@ function App() {
           </div>
         </div>
       </UserContext.Provider>
-    </Router>
+    </HashRouter>
   );
 }
 
