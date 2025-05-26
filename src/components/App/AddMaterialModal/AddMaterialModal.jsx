@@ -77,7 +77,7 @@ function AddMaterialModal({ isOpen, onClose, onSubmit }) {
           setCasError("");
           onSubmit(updatedMaterialData);
         } else {
-          setCasError("CAS number not found. Please check and try again.");
+          setCasError("CAS number not found.");
           setIsLoading(false);
           return;
         }
@@ -192,6 +192,9 @@ function AddMaterialModal({ isOpen, onClose, onSubmit }) {
             className="add-material-form__input"
           />
           {isLoading && <span>Loading...</span>}
+          {casError && (
+            <span className="add-material-form__error">{casError}</span>
+          )}
         </label>
         <button className="add-material-form__submit" type="submit">
           Add Material

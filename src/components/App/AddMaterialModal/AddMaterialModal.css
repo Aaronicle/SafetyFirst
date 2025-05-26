@@ -36,6 +36,12 @@
   width: 33%;
 }
 
+.add-material-form__error {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+  display: block;
+}
 .add-material-form__submit {
   padding: 10px 20px;
   background-color: #e67e22; /* A nice blue color */
