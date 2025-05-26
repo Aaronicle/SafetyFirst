@@ -3,6 +3,7 @@ import ModalWithForm from "../../ModalWithForm/ModalWithForm";
 import { useState } from "react";
 
 function AddMaterialModal({ isOpen, onClose, onSubmit }) {
+  const [casError, setCasError] = useState("");
   const [materialData, setMaterialData] = useState({
     name: "",
     health: "0",
@@ -22,6 +23,9 @@ function AddMaterialModal({ isOpen, onClose, onSubmit }) {
   const [isLoading, setIsLoading] = useState(false);
   const handleInputChange = async (e) => {
     const { name, value } = e.target;
+    if (name === "casNumber") {
+      setCasError("");
+    }
     setMaterialData({
       ...materialData,
       [name]: value,
@@ -45,7 +49,7 @@ function AddMaterialModal({ isOpen, onClose, onSubmit }) {
         if (response.ok) {
           const data = await response.json();
 
-          // Extract experimental properties
+          // API Data Extraction
           const boilingPoint =
             data.experimentalProperties?.find(
               (prop) => prop.name === "Boiling Point"
@@ -58,10 +62,9 @@ function AddMaterialModal({ isOpen, onClose, onSubmit }) {
             data.experimentalProperties?.find((prop) => prop.name === "Density")
               ?.property || "";
 
-          // Update material data with API response
           const updatedMaterialData = {
             ...materialData,
-            name: materialData.name || data.name, // Keep user's name if they entered one
+            name: materialData.name || data.name,
             molecularFormula: data.molecularFormula || "",
             experimentalProperties: data.experimentalProperties || [],
             boilingPoint,
@@ -71,12 +74,18 @@ function AddMaterialModal({ isOpen, onClose, onSubmit }) {
             synonyms: data.synonyms || [],
           };
 
-          // Submit the updated data
+          setCasError("");
           onSubmit(updatedMaterialData);
+        } else {
+          setCasError("CAS number not found. Please check and try again.");
+          setIsLoading(false);
+          return;
         }
       } catch (error) {
         console.error("Error fetching chemical data:", error);
-        // You might want to show an error message to the user here
+        setCasError("Error fetching chemical data. Please try again.");
+        setIsLoading(false);
+        return;
       } finally {
         setIsLoading(false);
       }
@@ -85,7 +94,6 @@ function AddMaterialModal({ isOpen, onClose, onSubmit }) {
       onSubmit(materialData);
     }
   };
-
   return (
     <ModalWithForm title="Add New Material" isOpen={isOpen} onClose={onClose}>
       <form className="add-material-form" onSubmit={handleSubmit}>
