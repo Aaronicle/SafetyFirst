@@ -181,7 +181,7 @@ function AddMaterialModal({ isOpen, onClose, onSubmit }) {
           </select>
         </label>
 
-        {/* CAS Number - Optional Text Input */}
+        {/* CAS Number-Optional Text Input */}
         <label className="add-material-form__label">
           CAS Number (Optional)
           <input
