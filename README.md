@@ -15,7 +15,7 @@ View detailed HMIS ratings and safety information for each chemical
 Check required PPE before handling any material
 Add new chemicals using the add button, including all safety ratings and PPE requirements
 
-<img src="./assets/images/Readme.png" alt="Application Screenshot" width="800"/>
+<img src="https://raw.githubusercontent.com/Aaronicle/SafetyFirst/main/assets/images/Readme.png" alt="Application Screenshot" width="800"/>
 
 Deployed website: https://aaronicle.github.io/SafetyFirst/#/
 
