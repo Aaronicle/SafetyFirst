@@ -36,11 +36,16 @@ function AddMaterialModal({ isOpen, onClose, onSubmit }) {
     if (materialData.casNumber) {
       setIsLoading(true);
       try {
+<<<<<<< HEAD
         const trimmedCasNumber = materialData.casNumber.trim();
         const response = await fetch(
           `https://commonchemistry.cas.org/api/detail?cas_rn=${encodeURIComponent(
             trimmedCasNumber
           )}`
+=======
+        const response = await fetch(
+          `https://commonchemistry.cas.org/api/detail?cas_rn=${materialData.casNumber}`
+>>>>>>> 6b3e501f514c4d6c2ae1de594005ea12e3fbbd67
         );
         if (response.ok) {
           const data = await response.json();
