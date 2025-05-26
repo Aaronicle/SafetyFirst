@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "../Header/Header";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { HashRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
@@ -12,6 +12,7 @@ import UserContext from "../../contexts/UserContext";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
+import About from "../About/About";
 import "../../vender/fonts/fonts.css";
 
 function App() {
@@ -117,7 +118,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <UserContext.Provider value={{ currentUser, setCurrentUser }}>
         <div className="App">
           <div className="App__content">
@@ -156,6 +157,7 @@ function App() {
                   />
                 }
               ></Route>
+              <Route path="/about" element={<About />}></Route>
             </Routes>
             <Footer />
             <LoginModal
@@ -192,7 +194,7 @@ function App() {
           </div>
         </div>
       </UserContext.Provider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
