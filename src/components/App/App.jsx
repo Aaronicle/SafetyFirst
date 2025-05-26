@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "../Header/Header";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { HashRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
@@ -12,10 +12,7 @@ import UserContext from "../../contexts/UserContext";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
-<<<<<<< HEAD
 import About from "../About/About";
-=======
->>>>>>> 6b3e501f514c4d6c2ae1de594005ea12e3fbbd67
 import "../../vender/fonts/fonts.css";
 
 function App() {
@@ -121,7 +118,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <Router>
       <UserContext.Provider value={{ currentUser, setCurrentUser }}>
         <div className="App">
           <div className="App__content">
@@ -160,10 +157,7 @@ function App() {
                   />
                 }
               ></Route>
-<<<<<<< HEAD
               <Route path="/about" element={<About />}></Route>
-=======
->>>>>>> 6b3e501f514c4d6c2ae1de594005ea12e3fbbd67
             </Routes>
             <Footer />
             <LoginModal
@@ -200,7 +194,7 @@ function App() {
           </div>
         </div>
       </UserContext.Provider>
-    </BrowserRouter>
+    </Router>
   );
 }
 

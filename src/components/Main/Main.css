@@ -4,8 +4,5 @@ main {
 
 .material-cards {
   display: flex;
-<<<<<<< HEAD
   flex-wrap: wrap;
-=======
->>>>>>> 6b3e501f514c4d6c2ae1de594005ea12e3fbbd67
 }
