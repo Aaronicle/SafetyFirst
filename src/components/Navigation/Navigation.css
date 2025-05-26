@@ -1,0 +1,45 @@
+.navigation {
+  padding-top: 2.5rem;
+}
+
+.navigation__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.navigation__link {
+  text-decoration: none;
+  color: white;
+  padding: 3px;
+  display: block;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  position: relative; /* This helps position the arrow */
+  padding-left: 2.25rem; /* Make space for the arrow */
+}
+
+.navigation__link::before {
+  content: "⟶"; /* This adds the arrow */
+  position: absolute;
+  top: 2px;
+  left: 1rem; /* Position it on the left */
+  right: 1rem;
+  opacity: 0; /* Hide it by default */
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.navigation__link:hover {
+  color: red; /* Blue color on hover */
+  transform: translateX(1px); /* Slight shift to the right on hover */
+
+  border-radius: 4px;
+}
+
+.navigation__link:hover::before {
+  opacity: 1; /* Show the arrow */
+  transform: translateX(0); /* Slide it in */
+}
