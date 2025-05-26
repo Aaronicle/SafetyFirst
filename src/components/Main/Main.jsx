@@ -7,17 +7,23 @@ function Main({
   materials,
   setIsMaterialDetailModalOpen,
   setSelectedMaterial,
+  onDeleteMaterial,
 }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const filteredMaterials = materials.filter((material) =>
+    material.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   return (
     <main className="main">
-      <SearchBar />
+      <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
       <div className="material-cards">
-        {materials.map((material) => (
+        {filteredMaterials.map((material) => (
           <MaterialCard
             key={material.id}
             material={material}
             setSelectedMaterial={setSelectedMaterial}
             setIsMaterialDetailModalOpen={setIsMaterialDetailModalOpen}
+            onDeleteMaterial={onDeleteMaterial}
           />
         ))}
       </div>

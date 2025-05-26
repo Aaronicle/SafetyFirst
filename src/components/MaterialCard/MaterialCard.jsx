@@ -25,17 +25,29 @@ function MaterialCard({
   material,
   setSelectedMaterial,
   setIsMaterialDetailModalOpen,
+  onDeleteMaterial,
+  currentUser,
 }) {
   const requiredPPEList = getRequiredPPE(material.ppe);
 
   const handleCardClick = () => {
-    console.log("Card clicked:", material);
+    console.log("Card clicked: ", material);
     setSelectedMaterial(material);
     setIsMaterialDetailModalOpen(true);
   };
 
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    onDeleteMaterial(material);
+  };
+
   return (
     <div className="material-card" onClick={handleCardClick}>
+      {material.owner === currentUser?._id && (
+        <button className="material-card__delete-button" onClick={handleDelete}>
+          ×
+        </button>
+      )}
       <h3 className="material-card__name">{material.name}</h3>
       <div className="material-card__hmis-list">
         <div className="material-card__hmis material-card__hmis--health">

@@ -6,6 +6,8 @@ import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import AddMaterialModal from "./AddMaterialModal/AddMaterialModal";
 import MaterialDetailModal from "../MaterialDetailModal/MaterialDetailModal";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import UserContext from "../../contexts/UserContext";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
@@ -23,6 +25,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [materials, setMaterials] = useState([]);
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [materialToDelete, setMaterialToDelete] = useState(null);
 
   useEffect(() => {
     // Load materials from localStorage when the app starts
@@ -49,6 +53,14 @@ function App() {
   const handleOpenEditProfileModal = () => {
     setIsEditProfileModalOpen(true);
   };
+  const handleOpenConfirmModal = (material) => {
+    setMaterialToDelete(material);
+    setIsConfirmModalOpen(true);
+  };
+  const handleCloseConfirmModal = () => {
+    setIsConfirmModalOpen(false);
+    setMaterialToDelete(null);
+  };
 
   const handleCloseEditProfileModal = () => {
     setIsEditProfileModalOpen(false);
@@ -69,6 +81,21 @@ function App() {
     setCurrentUser(values);
     setIsLoggedIn(true);
     handleCloseLoginModal();
+  };
+
+  const handleEditProfileSubmit = (values) => {
+    setCurrentUser({
+      ...currentUser,
+      ...values,
+    });
+    handleCloseEditProfileModal();
+  };
+
+  const handleDeleteMaterial = () => {
+    if (materialToDelete) {
+      setMaterials(materials.filter((item) => item.id !== materialToDelete.id));
+      handleCloseConfirmModal();
+    }
   };
 
   const handleAddMaterial = (newMaterial) => {
@@ -113,6 +140,7 @@ function App() {
                     selectedMaterial={selectedMaterial}
                     setSelectedMaterial={setSelectedMaterial}
                     materials={materials}
+                    onDeleteMaterial={handleOpenConfirmModal}
                   />
                 }
               ></Route>
@@ -124,6 +152,7 @@ function App() {
                     handleAddMaterial={handleOpenAddMaterialModal}
                     onSignOut={handleSignOutClick}
                     handleEditProfile={handleOpenEditProfileModal}
+                    onDeleteMaterial={handleOpenConfirmModal}
                   />
                 }
               ></Route>
@@ -148,6 +177,17 @@ function App() {
               isOpen={isMaterialDetailModalOpen}
               onClose={handleCloseMaterialDetailModal}
               selectedMaterial={selectedMaterial}
+            />
+            <EditProfileModal
+              isOpen={isEditProfileModalOpen}
+              onClose={handleCloseEditProfileModal}
+              onSubmit={handleEditProfileSubmit}
+              currentUser={currentUser}
+            />
+            <ConfirmationModal
+              isOpen={isConfirmModalOpen}
+              onClose={handleCloseConfirmModal}
+              onConfirm={handleDeleteMaterial}
             />
           </div>
         </div>
