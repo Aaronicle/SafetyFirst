@@ -177,6 +177,58 @@ function About() {
           </li>
         </ul>
       </section>
+      <section className="about-section">
+        <h2>CAS Number Integration</h2>
+        <p className="about-paragraph">
+          The Safety First App features integration with the Common Chemistry
+          API by CAS (Chemical Abstracts Service). When adding a new material,
+          users can optionally provide a CAS Registry Number to automatically
+          fetch additional chemical data.
+        </p>
+
+        <h3>Features</h3>
+        <ul>
+          <li className="about__list-item">
+            <strong>Automatic Data Population:</strong> When a valid CAS number
+            is entered, the app automatically retrieves:
+            <ul>
+              <li>Chemical name</li>
+              <li>Molecular formula</li>
+              <li>
+                Physical properties (boiling point, melting point, density)
+              </li>
+              <li>Chemical synonyms</li>
+              <li>Chemical structure image (when available)</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3>How it Works</h3>
+        <ol className="about__list-item">
+          <li>Enter a CAS number in the "Add New Material" form</li>
+          <li>The app connects to the CAS Common Chemistry API</li>
+          <li>
+            If the CAS number is valid, relevant chemical data is automatically
+            populated
+          </li>
+          <li>Users can still manually override any auto-populated fields</li>
+          <li>If the CAS number is invalid, an error message is displayed</li>
+        </ol>
+
+        <h3>Benefits</h3>
+        <ul>
+          <li className="about__list-item">Reduces manual data entry</li>
+          <li className="about__list-item">
+            Ensures accuracy of chemical information
+          </li>
+          <li className="about__list-item">
+            Provides additional valuable chemical data
+          </li>
+          <li className="about__list-item">
+            Maintains flexibility for custom entries
+          </li>
+        </ul>
+      </section>
     </div>
   );
 }
