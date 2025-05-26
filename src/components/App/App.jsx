@@ -12,6 +12,7 @@ import UserContext from "../../contexts/UserContext";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
+import About from "../About/About";
 import "../../vender/fonts/fonts.css";
 
 function App() {
@@ -156,6 +157,7 @@ function App() {
                   />
                 }
               ></Route>
+              <Route path="/about" element={<About />}></Route>
             </Routes>
             <Footer />
             <LoginModal
