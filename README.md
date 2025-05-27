@@ -1,3 +1,7 @@
+** NOTE TO CODE REVIEWER **
+
+The search bar is not connected to an API, it only is designed for later when the website will have hundreds of chemicals to filter. To test out the API, you need to sign in, then add a material. The CAS number input is connected to an API. When adding a material, fill out the cas number input with a real cas number. For example, for Formaldehyde you'd need to put 50-00-0 in the cas number input
+
 Safety First App
 
 What is the Safety First App?
