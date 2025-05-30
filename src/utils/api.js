@@ -7,6 +7,7 @@ export const fetchChemicalData = (casNumber) => {
       return response.json();
     })
     .then((data) => {
+      console.log("Raw API data:", data);
       // Process and return the data exactly like your current code
       return {
         name: data.name || "",
@@ -16,6 +17,7 @@ export const fetchChemicalData = (casNumber) => {
         inchi: data.inchi || "",
         inchiKey: data.inchiKey || "",
         synonyms: data.synonyms || [],
+        experimentalProperties: data.experimentalProperties || [],
       };
     });
 };

@@ -131,6 +131,7 @@ function App() {
             inchi: data.inchi || "",
             inchiKey: data.inchiKey || "",
             synonyms: data.synonyms || [],
+            experimentalProperties: data.experimentalProperties || [],
           };
 
           setCasError("");
@@ -153,6 +154,7 @@ function App() {
   const handleAddMaterial = (newMaterial) => {
     const materialToAdd = {
       id: Date.now(), // Add a unique ID
+      rn: newMaterial.rn || newMaterial.casNumber,
       name: newMaterial.name,
       health: newMaterial.health,
       flammability: newMaterial.flammability,
