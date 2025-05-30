@@ -1,10 +1,10 @@
-.material-detail {
+.MaterialDetailModal {
   max-height: 70vh; /* Takes up 70% of viewport height */
   overflow-y: auto; /* Enables vertical scrolling */
   padding: 20px;
 }
 
-.material-detail__section {
+.MaterialDetailModal__section {
   margin-bottom: 24px;
   padding: 16px;
   background-color: #f8f9fa;
@@ -12,20 +12,20 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.material-detail__section h3 {
+.MaterialDetailModal__section h3 {
   margin: 0 0 16px 0;
   color: #2c3e50;
   font-size: 1.2rem;
 }
 
 /* HMIS Grid styling */
-.material-detail__hmis-grid {
+.MaterialDetailModal__hmis-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
 
-.material-detail__hmis-item {
+.MaterialDetailModal__hmis-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,13 +35,13 @@
 }
 
 /* Properties styling */
-.material-detail__properties {
+.MaterialDetailModal__properties {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.material-detail__property {
+.MaterialDetailModal__property {
   display: flex;
   justify-content: space-between;
   padding: 8px;
@@ -49,17 +49,16 @@
   border-radius: 4px;
 }
 
-.material-detail__label {
+.MaterialDetailModal__label {
   font-weight: 600;
   color: #4a5568;
 }
 
-.material-detail__value {
+.MaterialDetailModal__value {
   color: #2d3748;
 }
 
-/* Synonyms styling */
-.material-detail__synonyms {
+.MaterialDetailModal__synonyms {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -68,7 +67,7 @@
   border-radius: 4px;
 }
 
-.material-detail__synonym-item {
+.MaterialDetailModal__synonym-item {
   background-color: #e2e8f0;
   padding: 4px 12px;
   border-radius: 16px;
@@ -76,35 +75,55 @@
   color: #4a5568;
 }
 
-/* PPE List styling */
-.material-detail__ppe-list {
+.MaterialDetailModal__ppe-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-.material-detail__ppe-item {
+.MaterialDetailModal__ppe-item {
   background-color: #edf2f7;
   padding: 8px 16px;
   border-radius: 4px;
   color: #4a5568;
 }
 
-/* Scrollbar styling for better visibility */
-.material-detail::-webkit-scrollbar {
+.MaterialDetailModal::-webkit-scrollbar {
   width: 8px;
 }
 
-.material-detail::-webkit-scrollbar-track {
+.MaterialDetailModal::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 4px;
 }
 
-.material-detail::-webkit-scrollbar-thumb {
+.MaterialDetailModal::-webkit-scrollbar-thumb {
   background: #cbd5e0;
   border-radius: 4px;
 }
 
-.material-detail::-webkit-scrollbar-thumb:hover {
+.MaterialDetailModal::-webkit-scrollbar-thumb:hover {
   background: #a0aec0;
+}
+
+@media (max-width: 425px) {
+  .MaterialDetailModal {
+    padding: 0;
+  }
+  .MaterialDetailModal__section {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+  }
+  .MaterialDetailModal__property {
+    padding: 0;
+  }
+
+  .MaterialDetailModal__label {
+    font-size: 15px;
+  }
+
+  .MaterialDetailModal__value {
+    font-size: 12px;
+  }
 }

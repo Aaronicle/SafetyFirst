@@ -17,6 +17,7 @@
 .profile__title {
   margin: 0;
   margin-left: 20px;
+  margin-bottom: 10px;
   font-size: 24px;
   color: white;
 }
@@ -24,4 +25,12 @@
 .profile__materials {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
+}
+
+@media (max-width: 425px) {
+  .profile__container {
+    display: flex;
+    flex-direction: column;
+  }
 }

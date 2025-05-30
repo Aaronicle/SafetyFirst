@@ -1,8 +1,9 @@
-main {
+.Main {
   padding: 16px 32px;
 }
 
-.material-cards {
+.Main__material-cards {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
 }

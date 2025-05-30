@@ -1,10 +1,10 @@
 import "./App.css";
 import Header from "../Header/Header";
-import { HashRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
-import AddMaterialModal from "./AddMaterialModal/AddMaterialModal";
+import AddMaterialModal from "../AddMaterialModal/AddMaterialModal";
 import MaterialDetailModal from "../MaterialDetailModal/MaterialDetailModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
@@ -14,6 +14,8 @@ import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
 import About from "../About/About";
 import "../../vender/fonts/fonts.css";
+import { fetchChemicalData } from "../../utils/api";
+import initialMaterialData from "../../utils/constants";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,9 +30,11 @@ function App() {
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [materialToDelete, setMaterialToDelete] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [casError, setCasError] = useState("");
+  const [materialData, setMaterialData] = useState(initialMaterialData);
 
   useEffect(() => {
-    // Load materials from localStorage when the app starts
     const savedMaterials = localStorage.getItem("materials");
     if (savedMaterials) {
       setMaterials(JSON.parse(savedMaterials));
@@ -96,6 +100,53 @@ function App() {
     if (materialToDelete) {
       setMaterials(materials.filter((item) => item.id !== materialToDelete.id));
       handleCloseConfirmModal();
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "casNumber") {
+      setCasError("");
+    }
+    setMaterialData({
+      ...materialData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (materialData.casNumber) {
+      setIsLoading(true);
+      const trimmedCasNumber = materialData.casNumber.trim();
+      fetchChemicalData(trimmedCasNumber)
+        .then((data) => {
+          const updatedMaterialData = {
+            ...materialData,
+            name: materialData.name || data.name,
+            molecularFormula: data.molecularFormula || "",
+            molecularMass: data.molecularMass || "",
+            canonicalSmiles: data.canonicalSmiles || "",
+            inchi: data.inchi || "",
+            inchiKey: data.inchiKey || "",
+            synonyms: data.synonyms || [],
+          };
+
+          setCasError("");
+          handleAddMaterial(updatedMaterialData);
+          setMaterialData(initialMaterialData);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching chemical data:", error);
+          setCasError("Error fetching chemical data. Please try again.");
+          setIsLoading(false);
+        });
+    } else {
+      // If no CAS number, just submit the form as is
+      handleAddMaterial(materialData);
+      setMaterialData(initialMaterialData);
     }
   };
 
@@ -173,7 +224,11 @@ function App() {
             <AddMaterialModal
               isOpen={isAddMaterialModalOpen}
               onClose={handleCloseAddMaterialModal}
-              onSubmit={handleAddMaterial}
+              onSubmit={handleSubmit}
+              materialData={materialData}
+              handleInputChange={handleInputChange}
+              casError={casError}
+              isLoading={isLoading}
             />
             <MaterialDetailModal
               isOpen={isMaterialDetailModalOpen}

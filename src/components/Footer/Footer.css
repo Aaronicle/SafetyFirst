@@ -1,4 +1,4 @@
-.footer__container {
+.Footer__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,12 +10,12 @@
   font-family: "Antonio", "Arial";
 }
 
-.footer__name {
+.Footer__name {
   margin: 0;
   margin-left: 20px;
 }
 
-.footer__year {
+.Footer__year {
   margin: 0;
   margin-right: 20px;
 }

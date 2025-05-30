@@ -14,9 +14,9 @@ function Main({
     material.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
   return (
-    <main className="main">
+    <main className="Main">
       <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
-      <div className="material-cards">
+      <div className="Main__material-cards">
         {filteredMaterials.map((material) => (
           <MaterialCard
             key={material.id}

@@ -16,12 +16,7 @@ function LoginModal({ isOpen, onClose, onSubmit }) {
   };
 
   return (
-    <ModalWithForm
-      className="LoginModal"
-      title="Sign In"
-      isOpen={isOpen}
-      onClose={onClose}
-    >
+    <ModalWithForm title="Sign In" isOpen={isOpen} onClose={onClose}>
       <div className="LoginModal__content">
         <form className="LoginModal__form" onSubmit={handleSubmit}>
           <input
@@ -30,6 +25,7 @@ function LoginModal({ isOpen, onClose, onSubmit }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
+            required
           />
           <input
             className="LoginModal__input"
@@ -37,6 +33,7 @@ function LoginModal({ isOpen, onClose, onSubmit }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
+            required
           />
           <button className="LoginModal__submit" type="submit">
             Sign In

@@ -39,3 +39,9 @@
 .sidebar__button:hover {
   border: red 2px solid;
 }
+
+@media screen and (max-width: 425px) {
+  .sidebar {
+    position: static;
+  }
+}

@@ -18,12 +18,7 @@ function RegisterModal({ isOpen, onClose, onSubmit }) {
   };
 
   return (
-    <ModalWithForm
-      className="RegisterModal"
-      title="Sign Up"
-      isOpen={isOpen}
-      onClose={onClose}
-    >
+    <ModalWithForm title="Sign Up" isOpen={isOpen} onClose={onClose}>
       <div className="RegisterModal__content">
         <form className="RegisterModal__form" onSubmit={handleSubmit}>
           <input

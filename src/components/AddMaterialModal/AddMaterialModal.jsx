@@ -1,108 +1,25 @@
 import "./AddMaterialModal.css";
-import ModalWithForm from "../../ModalWithForm/ModalWithForm";
-import { useState } from "react";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function AddMaterialModal({ isOpen, onClose, onSubmit }) {
-  const [casError, setCasError] = useState("");
-  const [materialData, setMaterialData] = useState({
-    name: "",
-    health: "0",
-    flammability: "0",
-    physical: "0",
-    ppe: "A",
-    casNumber: "",
-    requiredPPE: [],
-    molecularFormula: "",
-    boilingPoint: "",
-    meltingPoint: "",
-    density: "",
-    image: "",
-    synonyms: [],
-  });
-
-  const [isLoading, setIsLoading] = useState(false);
-  const handleInputChange = async (e) => {
-    const { name, value } = e.target;
-    if (name === "casNumber") {
-      setCasError("");
-    }
-    setMaterialData({
-      ...materialData,
-      [name]: value,
-    });
-  };
-
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // If there's a CAS number, fetch the chemical data first
-    if (materialData.casNumber) {
-      setIsLoading(true);
-      try {
-        const trimmedCasNumber = materialData.casNumber.trim();
-        const response = await fetch(
-          `https://commonchemistry.cas.org/api/detail?cas_rn=${encodeURIComponent(
-            trimmedCasNumber
-          )}`
-        );
-        if (response.ok) {
-          const data = await response.json();
-
-          // API Data Extraction
-          const boilingPoint =
-            data.experimentalProperties?.find(
-              (prop) => prop.name === "Boiling Point"
-            )?.property || "";
-          const meltingPoint =
-            data.experimentalProperties?.find(
-              (prop) => prop.name === "Melting Point"
-            )?.property || "";
-          const density =
-            data.experimentalProperties?.find((prop) => prop.name === "Density")
-              ?.property || "";
-
-          const updatedMaterialData = {
-            ...materialData,
-            name: materialData.name || data.name,
-            molecularFormula: data.molecularFormula || "",
-            experimentalProperties: data.experimentalProperties || [],
-            boilingPoint,
-            meltingPoint,
-            density,
-            image: data.image || "",
-            synonyms: data.synonyms || [],
-          };
-
-          setCasError("");
-          onSubmit(updatedMaterialData);
-        } else {
-          setCasError("CAS number not found.");
-          setIsLoading(false);
-          return;
-        }
-      } catch (error) {
-        console.error("Error fetching chemical data:", error);
-        setCasError("Error fetching chemical data. Please try again.");
-        setIsLoading(false);
-        return;
-      } finally {
-        setIsLoading(false);
-      }
-    } else {
-      // If no CAS number, just submit the form as is
-      onSubmit(materialData);
-    }
-  };
+function AddMaterialModal({
+  isOpen,
+  onClose,
+  onSubmit,
+  materialData,
+  handleInputChange,
+  casError,
+  isLoading,
+}) {
   return (
     <ModalWithForm title="Add New Material" isOpen={isOpen} onClose={onClose}>
-      <form className="add-material-form" onSubmit={handleSubmit}>
+      <form className="add-material-form" onSubmit={onSubmit}>
         {/* Material Name - Text Input */}
         <label className="add-material-form__label">
           Material Name
           <input
             type="text"
             name="name"
+            placeholder="example: Formaldyhyde"
             value={materialData.name}
             onChange={handleInputChange}
             className="add-material-form__input"
@@ -187,6 +104,7 @@ function AddMaterialModal({ isOpen, onClose, onSubmit }) {
           <input
             type="text"
             name="casNumber"
+            placeholder="example: 50-00-0"
             value={materialData.casNumber}
             onChange={handleInputChange}
             className="add-material-form__input"

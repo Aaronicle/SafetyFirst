@@ -1,4 +1,4 @@
-.edit-profile-form {
+.EditProfileModal {
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -6,7 +6,7 @@
   color: white;
 }
 
-.edit-profile-form__label {
+.EditProfileModal__label {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -16,7 +16,7 @@
   color: white;
 }
 
-.edit-profile-form__input {
+.EditProfileModal__input {
   padding: 5px 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -25,13 +25,13 @@
   max-width: 300px;
 }
 
-.edit-profile-form__input:focus {
+.EditProfileModal__input:focus {
   outline: none;
   border-color: #4caf50;
   box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
 }
 
-.edit-profile-form__submit {
+.EditProfileModal__submit {
   padding: 10px 20px;
   background-color: #e67e22;
   color: white;
@@ -42,6 +42,6 @@
   font-size: 20px;
 }
 
-.edit-profile-form__submit:hover {
+.EditProfileModal__submit:hover {
   background-color: #d35400;
 }

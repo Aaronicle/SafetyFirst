@@ -19,3 +19,15 @@
   border: 2px solid darkred; /* or any color that matches your theme */
   box-shadow: 0 0 10px 1px rgba(0, 123, 255, 0.3);
 }
+
+@media screen and (max-width: 768px) {
+  .search-bar {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .search-bar {
+    margin-left: 0;
+  }
+}
