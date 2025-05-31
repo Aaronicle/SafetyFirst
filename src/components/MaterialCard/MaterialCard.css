@@ -37,10 +37,6 @@
 .material-card__name {
   align-self: center;
   font-size: 20px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 250px;
 }
 
 .material-card__hmis-list {
