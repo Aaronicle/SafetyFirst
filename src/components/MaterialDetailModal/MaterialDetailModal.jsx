@@ -28,20 +28,14 @@ function MaterialDetailModal({ isOpen, onClose, selectedMaterial }) {
   const requiredPPEList = getRequiredPPE(selectedMaterial.ppe);
 
   const findPropertyValue = (propertyName) => {
-    console.log(
-      "Full experimental properties:",
-      selectedMaterial.experimentalProperties
-    );
     if (!selectedMaterial || !selectedMaterial.experimentalProperties) {
       return "";
     }
     const propertyObject = selectedMaterial.experimentalProperties.find(
       (prop) => prop.name === propertyName
     );
-    console.log(`Property object for ${propertyName}:`, propertyObject);
     return propertyObject ? propertyObject.property : "";
   };
-  console.log("Modal received material:", selectedMaterial);
   return (
     <ModalWithForm
       title={selectedMaterial.name}
