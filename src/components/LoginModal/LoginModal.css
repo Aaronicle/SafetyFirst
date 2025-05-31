@@ -1,0 +1,39 @@
+.LoginModal__content {
+  width: 400px;
+}
+
+.LoginModal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.LoginModal__input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  background-color: black;
+  color: white;
+}
+
+.LoginModal__submit {
+  padding: 10px 20px;
+  background-color: #e67e22; /* A nice blue color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  margin-bottom: 20px;
+}
+
+.LoginModal__submit:hover {
+  background-color: #d35400; /* Slightly darker blue */
+  transform: translateY(2px); /* Slight lift effect */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+@media screen and (max-width: 425px) {
+  .LoginModal__content {
+    width: 250px;
+  }
+}

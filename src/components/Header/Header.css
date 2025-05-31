@@ -1,0 +1,132 @@
+.Header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  justify-content: space-between;
+  color: gray;
+  font-family: "Antonio", "Arial";
+}
+
+.Header__logo {
+  display: flex;
+  font-weight: bold;
+  font-size: 36px;
+  border: solid 2px red;
+  border-radius: 50%;
+}
+
+.Header__title {
+  place-self: center;
+  font-size: 100px;
+  margin: 0;
+}
+
+.Header__title-safety {
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.Header__title-first {
+  animation: pulse 4s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.Header__title-wrap {
+  display: flex;
+}
+.Header__logo_S {
+  animation: fadeInOut 6s infinite;
+}
+
+.Header__logo_F {
+  animation: fadeInOut 6s infinite;
+  animation-delay: 0.5s;
+}
+
+.Header__logo_space {
+}
+
+.Header__btn-wrap {
+  margin-right: 5rem;
+}
+
+.Header__btn {
+  padding: 8px 16px;
+  margin: 0 8px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.Header__btn_add {
+  padding: 8px;
+}
+
+.Header__btn:hover {
+  background-color: red;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    color: darkgray;
+  }
+  50% {
+    color: red;
+  }
+  100% {
+    color: darkgray;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Header {
+    flex-direction: column; /* Stack items vertically */
+    padding: 1rem; /* Reduce horizontal padding */
+    text-align: center;
+  }
+
+  .Header__title {
+    font-size: 60px; /* Reduce from 100px */
+    margin-bottom: 1rem;
+  }
+
+  .Header__btn-wrap {
+    margin-right: 0; /* Remove the 5rem margin */
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .Header__title {
+    font-size: 50px;
+  }
+
+  .Header__btn {
+    padding: 6px 12px;
+    margin: 0 4px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 325px) {
+  .Header__title {
+    font-size: 40px;
+  }
+}
