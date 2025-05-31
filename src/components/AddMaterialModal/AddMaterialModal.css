@@ -1,0 +1,60 @@
+.add-material-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  color: white;
+}
+
+.add-material-form__label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.add-material-form__input,
+.add-material-form__select {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.add-material-form__input:focus,
+.add-material-form__select:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+}
+
+.add-material-form__select {
+  background-color: white;
+  cursor: pointer;
+  width: 33%;
+}
+
+.add-material-form__error {
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+  display: block;
+}
+.add-material-form__submit {
+  padding: 10px 20px;
+  background-color: #e67e22; /* A nice blue color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  font-size: 20px;
+}
+
+/* Optional: Add some hover effects */
+.add-material-form__input:hover,
+.add-material-form__select:hover {
+  border-color: #999;
+}

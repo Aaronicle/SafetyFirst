@@ -1,0 +1,100 @@
+.About {
+  color: white;
+}
+
+.About__header {
+  text-align: center;
+}
+
+.About__container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.About__container h1 {
+  color: white;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.About__section {
+  background: #880202;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.About__paragraph {
+  font-size: 20px;
+  line-height: 1.6;
+}
+.About__section h2 {
+  color: white;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.About__section h3 {
+  margin: 20px 0 10px 0;
+}
+
+.About__list-item {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.About__rating-explanations ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.About__rating-explanations li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.About__rating-explanations li:last-child {
+  border-bottom: none;
+}
+
+.About__rating-explanations strong {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  background: black;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+/* Color coding for HMIS sections */
+.About__rating-explanations h3:nth-child(1) strong {
+  /* Health Hazard */
+  background-color: #3498db;
+  color: white;
+}
+
+.About__rating-explanations h3:nth-child(3) strong {
+  /* Flammability */
+  background-color: #e74c3c;
+  color: white;
+}
+
+.About__rating-explanations h3:nth-child(5) strong {
+  /* Physical Hazard */
+  background-color: #f39c12;
+  color: white;
+}
+
+@media screen and (max-width: 425px) {
+  .About__section h2 {
+    font-size: 24px;
+  }
+
+  .About__paragraph {
+    font-size: 18px;
+  }
+}
