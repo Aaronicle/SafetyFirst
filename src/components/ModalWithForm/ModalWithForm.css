@@ -19,6 +19,10 @@
   font-size: 28px;
   margin-top: 5px;
   color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
 }
 
 .ModalWithForm__close {
