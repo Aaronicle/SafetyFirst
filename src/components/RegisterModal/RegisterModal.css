@@ -12,6 +12,7 @@
   border-radius: 4px;
   padding: 8px;
   background-color: black;
+  color: white;
 }
 
 .RegisterModal__submit {
@@ -29,4 +30,10 @@
   background-color: #d35400; /* Slightly darker blue */
   transform: translateY(2px); /* Slight lift effect */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+@media screen and (max-width: 425px) {
+  .RegisterModal__content {
+    width: 250px;
+  }
 }
