@@ -21,3 +21,13 @@ export const fetchChemicalData = (casNumber) => {
       };
     });
 };
+
+export const saveMaterial = (materialData) => {
+  return fetch("http://localhost:3001/materials", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(materialData),
+  }).then((response) => response.json());
+};

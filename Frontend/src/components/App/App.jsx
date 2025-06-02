@@ -14,7 +14,7 @@ import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
 import About from "../About/About";
 import "../../vender/fonts/fonts.css";
-import { fetchChemicalData } from "../../utils/api";
+import { fetchChemicalData, saveMaterial } from "../../utils/api";
 import initialMaterialData from "../../utils/constants";
 
 function App() {
@@ -167,6 +167,7 @@ function App() {
       synonyms: newMaterial.synonyms,
     };
     setMaterials([...materials, materialToAdd]);
+    saveMaterial(materialToAdd);
     handleCloseAddMaterialModal();
   };
 
