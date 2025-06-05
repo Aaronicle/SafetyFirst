@@ -37,11 +37,11 @@ const material = new mongoose.Schema({
     default: [],
   },
   molecularFormula: {
-    type: [String],
-    default: [],
+    type: String,
+    default: "",
   },
   experimentalProperties: {
-    type: [String],
+    type: [Object],
     default: [],
   },
   synonyms: {

@@ -1,19 +1,21 @@
 const { celebrate, Joi } = require("celebrate");
 
 const validateMaterial = celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30).messages({
-      "string.min": 'The minimum length of the "name" field is 2',
-      "string.max": 'The maximum length of the "name" field is 30',
-      "string.empty": 'The "name" field must be filled in',
-    }),
-    health: Joi.number().valid(0, 1, 2, 3, 4).required(),
-    flammability: Joi.number().valid(0, 1, 2, 3, 4).required(),
-    physical: Joi.number().valid(0, 1, 2, 3, 4).required(),
-    ppe: Joi.string()
-      .valid("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "X")
-      .required(),
-  }),
+  body: Joi.object()
+    .keys({
+      name: Joi.string().required().min(2).max(30).messages({
+        "string.min": 'The minimum length of the "name" field is 2',
+        "string.max": 'The maximum length of the "name" field is 30',
+        "string.empty": 'The "name" field must be filled in',
+      }),
+      health: Joi.number().valid(0, 1, 2, 3, 4).required(),
+      flammability: Joi.number().valid(0, 1, 2, 3, 4).required(),
+      physical: Joi.number().valid(0, 1, 2, 3, 4).required(),
+      ppe: Joi.string()
+        .valid("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "X")
+        .required(),
+    })
+    .unknown(true),
 });
 
 const validateUserBody = celebrate({

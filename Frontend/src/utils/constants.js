@@ -1,4 +1,4 @@
-const initialMaterialData = {
+export const initialMaterialData = {
   name: "",
   health: "0",
   flammability: "0",
@@ -14,7 +14,7 @@ const initialMaterialData = {
   synonyms: [],
 };
 
-const PPE_REQUIREMENTS = {
+export const PPE_REQUIREMENTS = {
   A: ["Safety Glasses"],
   B: ["Safety Glasses", "Gloves"],
   C: ["Safety Glasses", "Gloves", "Apron"],
@@ -31,4 +31,7 @@ const PPE_REQUIREMENTS = {
   ],
 };
 
-export default initialMaterialData;
+export const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwrnj.undo.it"
+    : "http://localhost:3001";

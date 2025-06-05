@@ -8,6 +8,7 @@ const {
 
 const createMaterial = (req, res, next) => {
   const owner = req.user._id;
+  console.log("Received data:", req.body);
 
   const {
     rn,
@@ -41,7 +42,7 @@ const createMaterial = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === "ValidationError") {
-        next(new BadRequestError("Invalid data provided"));
+        next(new BadRequestError(`Invalid data provided${err}`));
       } else {
         next(err);
       }
@@ -51,7 +52,7 @@ const createMaterial = (req, res, next) => {
 const getMaterials = (req, res, next) => {
   material
     .find({})
-    .then((items) => res.status(200).send(items))
+    .then((materials) => res.status(200).send(materials))
     .catch((err) => {
       console.error(err);
       next(err);
@@ -59,10 +60,10 @@ const getMaterials = (req, res, next) => {
 };
 
 const deleteMaterial = (req, res, next) => {
-  const { itemId } = req.params;
+  const { materialId } = req.params;
 
   material
-    .findById(itemId)
+    .findById(materialId)
     .orFail()
     .then((item) => {
       if (String(item.owner) !== req.user._id) {
@@ -70,8 +71,8 @@ const deleteMaterial = (req, res, next) => {
           new ForbiddenError("You don't have permission to delete this item")
         );
       }
-      return material.deleteOne(item).then((deletedItem) => {
-        res.send(deletedItem);
+      return material.deleteOne(item).then((deletedMaterial) => {
+        res.send(deletedMaterial);
       });
     })
     .catch((err) => {

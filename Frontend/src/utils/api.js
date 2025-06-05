@@ -1,3 +1,9 @@
+import { BASE_URL } from "./constants";
+
+export function checkRes(res) {
+  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+}
+
 export const fetchChemicalData = (casNumber) => {
   return fetch(`https://commonchemistry.cas.org/api/detail?cas_rn=${casNumber}`)
     .then((response) => {
@@ -22,12 +28,13 @@ export const fetchChemicalData = (casNumber) => {
     });
 };
 
-export const saveMaterial = (materialData) => {
-  return fetch("http://localhost:3001/materials", {
+export const saveMaterial = (token, materialData) => {
+  return fetch(`${BASE_URL}/materials`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(materialData),
-  }).then((response) => response.json());
+  }).then(checkRes);
 };
