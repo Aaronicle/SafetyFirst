@@ -14,6 +14,12 @@ const validateMaterial = celebrate({
       ppe: Joi.string()
         .valid("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "X")
         .required(),
+      requiredPPE: Joi.array(),
+      rn: Joi.string(),
+      molecularFormula: Joi.string(),
+      owner: Joi.string(),
+      experimentalProperties: Joi.array(),
+      synonyms: Joi.array(),
     })
     .unknown(true),
 });
