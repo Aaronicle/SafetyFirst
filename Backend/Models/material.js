@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 
 const material = new mongoose.Schema({
-  rn: { type: String, minlength: 2, maxlength: 20 },
+  rn: { type: String, maxlength: 20 },
   name: {
     type: String,
     required: true,

@@ -14,7 +14,7 @@ import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
 import About from "../About/About";
 import "../../vender/fonts/fonts.css";
-import { fetchChemicalData, saveMaterial } from "../../utils/api";
+import { fetchChemicalData, saveMaterial, getMaterials } from "../../utils/api";
 import { signup, signin, checkToken } from "../../utils/auth";
 import { initialMaterialData } from "../../utils/constants";
 
@@ -34,6 +34,14 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [casError, setCasError] = useState("");
   const [materialData, setMaterialData] = useState(initialMaterialData);
+
+  useEffect(() => {
+    getMaterials()
+      .then((materialList) => {
+        setMaterials(materialList);
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
   // useEffect(() => {
   //   const savedMaterials = localStorage.getItem("materials");
@@ -158,8 +166,7 @@ function App() {
           setIsLoading(false);
         })
         .catch((error) => {
-          console.error("Error fetching chemical data:", error);
-          setCasError("Error fetching chemical data. Please try again.");
+          setCasError("Error fetching chemical data.");
           setIsLoading(false);
         });
     } else {

@@ -38,3 +38,9 @@ export const saveMaterial = (token, materialData) => {
     body: JSON.stringify(materialData),
   }).then(checkRes);
 };
+
+export const getMaterials = () => {
+  return fetch(`${BASE_URL}/materials`, {
+    method: "GET",
+  }).then(checkRes);
+};
