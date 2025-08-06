@@ -110,9 +110,9 @@ function AddMaterialModal({
             className="add-material-form__input"
           />
           {isLoading && <span>Loading...</span>}
-          {casError && (
-            <span className="add-material-form__error">{casError}</span>
-          )}
+          <span className="add-material-form__error">
+            {casError || "\u00A0"}
+          </span>
         </label>
         <button className="add-material-form__submit" type="submit">
           Add Material

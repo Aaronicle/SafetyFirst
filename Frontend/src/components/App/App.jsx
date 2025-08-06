@@ -14,8 +14,9 @@ import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
 import About from "../About/About";
 import "../../vender/fonts/fonts.css";
-import { fetchChemicalData } from "../../utils/api";
-import initialMaterialData from "../../utils/constants";
+import { fetchChemicalData, saveMaterial, getMaterials } from "../../utils/api";
+import { signup, signin, checkToken } from "../../utils/auth";
+import { initialMaterialData } from "../../utils/constants";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -35,15 +36,23 @@ function App() {
   const [materialData, setMaterialData] = useState(initialMaterialData);
 
   useEffect(() => {
-    const savedMaterials = localStorage.getItem("materials");
-    if (savedMaterials) {
-      setMaterials(JSON.parse(savedMaterials));
-    }
+    getMaterials()
+      .then((materialList) => {
+        setMaterials(materialList);
+      })
+      .catch((error) => console.error(error));
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("materials", JSON.stringify(materials));
-  }, [materials]);
+  // useEffect(() => {
+  //   const savedMaterials = localStorage.getItem("materials");
+  //   if (savedMaterials) {
+  //     setMaterials(JSON.parse(savedMaterials));
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("materials", JSON.stringify(materials));
+  // }, [materials]);
 
   const handleOpenLoginModal = () => setIsLoginModalOpen(true);
   const handleCloseLoginModal = () => setIsLoginModalOpen(false);
@@ -72,20 +81,37 @@ function App() {
   };
 
   const handleSignOutClick = () => {
-    setIsLoggedIn(false);
+    localStorage.removeItem("jwt");
     setCurrentUser(null);
+    setIsLoggedIn(false);
+    navigate("/");
   };
 
-  const handleRegisterSubmit = (values) => {
-    setCurrentUser(values);
-    setIsLoggedIn(true);
+  const handleRegisterSubmit = ({ email, password, name }) => {
+    signup({ email, password, name })
+      .then((res) => {
+        handleLoginSubmit({ email, password });
+      })
+      .catch(console.error);
     handleCloseRegisterModal();
   };
 
-  const handleLoginSubmit = (values) => {
-    setCurrentUser(values);
-    setIsLoggedIn(true);
-    handleCloseLoginModal();
+  const handleLoginSubmit = ({ email, password }) => {
+    console.log("Attempting signin with:", { email, password });
+    return signin({ email, password })
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
+        checkToken(res.token).then((user) => {
+          console.log("user", user);
+          setIsLoggedIn(true);
+          setCurrentUser(user);
+          handleCloseLoginModal();
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
   };
 
   const handleEditProfileSubmit = (values) => {
@@ -140,8 +166,7 @@ function App() {
           setIsLoading(false);
         })
         .catch((error) => {
-          console.error("Error fetching chemical data:", error);
-          setCasError("Error fetching chemical data. Please try again.");
+          setCasError("Error fetching chemical data.");
           setIsLoading(false);
         });
     } else {
@@ -152,21 +177,26 @@ function App() {
   };
 
   const handleAddMaterial = (newMaterial) => {
-    const materialToAdd = {
-      id: Date.now(), // Add a unique ID
-      rn: newMaterial.rn || newMaterial.casNumber,
+    const token = localStorage.getItem("jwt");
+    console.log(newMaterial);
+    const materialData = {
+      // id: Date.now(), // Add a unique ID
+      // rn: newMaterial.rn || newMaterial.casNumber,
       name: newMaterial.name,
-      health: newMaterial.health,
-      flammability: newMaterial.flammability,
-      physical: newMaterial.physical,
+      health: Number(newMaterial.health),
+      flammability: Number(newMaterial.flammability),
+      physical: Number(newMaterial.physical),
       ppe: newMaterial.ppe,
       requiredPPE: newMaterial.requiredPPE || [],
-      casNumber: newMaterial.casNumber,
+      rn: newMaterial.casNumber,
       molecularFormula: newMaterial.molecularFormula,
       experimentalProperties: newMaterial.experimentalProperties,
       synonyms: newMaterial.synonyms,
     };
-    setMaterials([...materials, materialToAdd]);
+    console.log("Sending material data:", materialData);
+    saveMaterial(token, materialData).then((newMaterialData) => {
+      setMaterials([...materials, newMaterialData.data]);
+    });
     handleCloseAddMaterialModal();
   };
 
